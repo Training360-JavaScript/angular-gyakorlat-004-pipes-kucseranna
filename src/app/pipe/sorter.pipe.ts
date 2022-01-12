@@ -13,14 +13,14 @@ export class SorterPipe implements PipeTransform {
    */
   transform(value: any[], key: string): any[] {
     // A KÖVETKEZŐ SORT TÁVOLÍTSD EL!!!
-    return value;
+
 
     /**
      * FELADAT!
      * Ellenőrzés: ha a value nem tömb vagy nincs megadva a key,
      * térj vissza a value változóval.
      */
-
+    if (!Array.isArray(value) || !key) return value;
 
 
     /**
@@ -33,8 +33,10 @@ export class SorterPipe implements PipeTransform {
      *  összehasonlításának az eredményével.
      */
 
+    return value.sort((a, b) =>
+      !isNaN(a[key]) && !isNaN(b[key]) ? a[key] - b[key] :
+        (String(a[key]).toLowerCase()).localeCompare(String(b[key]).toLowerCase()));
 
   }
-
 }
 
